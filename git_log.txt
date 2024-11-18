@@ -1,0 +1,10 @@
+* 82061cb (HEAD -> master, origin/master) encrypted code
+* cf1f120 test
+* 017762b error handling
+* 3ab8393 prosite scan
+* 894d531 conservation analysis
+* caa67b0 filter sequences
+* 11b4026 sequence download
+* fdafa73 sequence download
+* b93a117 argument parsing
+* e61753f Initial setup
