@@ -23,9 +23,7 @@ python script.py --protein_family "glucose-6-phosphatase" --taxonomy "Aves" --ou
 
 During running, if the program pauses and prompts the user for input, it means that the program's tools are asking the user to specify parameters (or enter to accept the default value)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/8e0198fd-44c9-4c1c-98de-821bf586d8fd/af114a93-a88b-4bfe-8026-55413513b931/image.png)
-
-### **3. Outputs (with examples)**
+### **3. Outputs **
 
 Once the programme runs successfully, it generates the following files in the specified output directory: 
 
@@ -35,8 +33,5 @@ Once the programme runs successfully, it generates the following files in the sp
 
 **conservation_plot.png**: A graphical representation of sequence conservation.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/8e0198fd-44c9-4c1c-98de-821bf586d8fd/88a236cf-6374-4149-93a1-19b8fd060d15/image.png)
-
 **prosite_scan_results.txt**: Results of motif detection from the PROSITE database.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/8e0198fd-44c9-4c1c-98de-821bf586d8fd/68a9d93a-2e55-4da2-8561-1be809777dd7/image.png)
