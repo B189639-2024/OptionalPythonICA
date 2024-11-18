@@ -3,6 +3,12 @@ import subprocess
 import argparse
 from Bio import SeqIO
 
+def analyze_conservation(input_fasta, output_plot):
+    command = f"plotcon -sequence {input_fasta} -graph png -goutfile {output_plot}"
+    print(f"Running command: {command}")
+    subprocess.run(command, shell=True, check=True)
+    print(f"Conservation plot saved to {output_plot}")
+
 def filter_sequences(input_fasta, output_fasta, min_length=100, max_length=2000):
     with open(input_fasta, "r") as infile, open(output_fasta, "w") as outfile:
         for record in SeqIO.parse(infile, "fasta"):
@@ -36,6 +42,8 @@ def main():
     filtered_fasta = os.path.join(args.output_path, "filtered_sequences.fasta")
     seq_file = args.protein_family+'_'+args.taxonomy+'_sequences.fasta'
     filter_sequences(os.path.join(args.output_path, seq_file), filtered_fasta)
+    conservation_plot = os.path.join(args.output_path, "conservation_plot.png")
+    analyze_conservation(filtered_fasta, conservation_plot)
 
 
 
