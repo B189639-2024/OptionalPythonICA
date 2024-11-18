@@ -23,7 +23,7 @@ python script.py --protein_family "glucose-6-phosphatase" --taxonomy "Aves" --ou
 
 During running, if the program pauses and prompts the user for input, it means that the program's tools are asking the user to specify parameters (or enter to accept the default value)
 
-### **3. Outputs **
+### **3. Outputs**
 
 Once the programme runs successfully, it generates the following files in the specified output directory: 
 
