@@ -44,15 +44,34 @@ def main():
     args = parse_args()
     os.makedirs(args.output_path, exist_ok=True)
     print(f"Output directory: {args.output_path}")
-    download_sequences(args.protein_family, args.taxonomy, args.output_path)
+    try:
+        download_sequences(args.protein_family, args.taxonomy, args.output_path)
+    except subprocess.CalledProcessError as e:
+        print(f"downloding error: {e}")
+        with open(os.path.join(output_path, "error.log"), "a") as log_file:
+            log_file.write(str(e) + "\n")
     filtered_fasta = os.path.join(args.output_path, "filtered_sequences.fasta")
     seq_file = args.protein_family+'_'+args.taxonomy+'_sequences.fasta'
-    filter_sequences(os.path.join(args.output_path, seq_file), filtered_fasta)
-    conservation_plot = os.path.join(args.output_path, "conservation_plot.png")
-    analyze_conservation(filtered_fasta, conservation_plot)
-    prosite_output = os.path.join(args.output_path, "prosite_scan_results.txt")
-    scan_prosite(filtered_fasta, prosite_output)
-
+    try:
+        filter_sequences(os.path.join(args.output_path, seq_file), filtered_fasta)
+    except subprocess.CalledProcessError as e:
+        print(f"filter error: {e}")
+        with open(os.path.join(output_path, "error.log"), "a") as log_file:
+            log_file.write(str(e) + "\n")
+    try:
+        conservation_plot = os.path.join(args.output_path, "conservation_plot.png")
+        analyze_conservation(filtered_fasta, conservation_plot)
+    except subprocess.CalledProcessError as e:
+        print(f"conservation plot error: {e}")
+        with open(os.path.join(output_path, "error.log"), "a") as log_file:
+            log_file.write(str(e) + "\n")
+    try:
+        prosite_output = os.path.join(args.output_path, "prosite_scan_results.txt")
+        scan_prosite(filtered_fasta, prosite_output)
+    except subprocess.CalledProcessError as e:
+        print(f"scan prosite error: {e}")
+        with open(os.path.join(output_path, "error.log"), "a") as log_file:
+            log_file.write(str(e) + "\n")
 
 
 if __name__ == "__main__":
