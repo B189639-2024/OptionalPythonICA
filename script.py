@@ -3,6 +3,12 @@ import subprocess
 import argparse
 from Bio import SeqIO
 
+def scan_prosite(input_fasta, output_file):
+    command = f"patmatmotifs -sequence {input_fasta} -outfile {output_file}"
+    print(f"Running command: {command}")
+    subprocess.run(command, shell=True, check=True)
+    print(f"PROSITE scan results saved to {output_file}")
+
 def analyze_conservation(input_fasta, output_plot):
     command = f"plotcon -sequence {input_fasta} -graph png -goutfile {output_plot}"
     print(f"Running command: {command}")
@@ -44,6 +50,8 @@ def main():
     filter_sequences(os.path.join(args.output_path, seq_file), filtered_fasta)
     conservation_plot = os.path.join(args.output_path, "conservation_plot.png")
     analyze_conservation(filtered_fasta, conservation_plot)
+    prosite_output = os.path.join(args.output_path, "prosite_scan_results.txt")
+    scan_prosite(filtered_fasta, prosite_output)
 
 
 
