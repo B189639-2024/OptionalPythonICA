@@ -9,7 +9,7 @@ def download_sequences(protein_family, taxonomy, output_path):
         f"esearch -db protein -query '{protein_family}[PROTEIN] AND {taxonomy}[ORGANISM]' | "
         f"efetch -format fasta > {fasta_file}"
     )
-    print(f"esearch {protein_family}")
+    print(f"esearch {protein_family} {taxonomy}")
     subprocess.run(command, shell=True, check=True)
     print(f"Sequences saved to {fasta_file}")
 
