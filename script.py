@@ -1,6 +1,14 @@
 import os
 import subprocess
 import argparse
+from Bio import SeqIO
+
+def filter_sequences(input_fasta, output_fasta, min_length=100, max_length=2000):
+    with open(input_fasta, "r") as infile, open(output_fasta, "w") as outfile:
+        for record in SeqIO.parse(infile, "fasta"):
+            if min_length <= len(record.seq) <= max_length:
+                SeqIO.write(record, outfile, "fasta")
+    print(f"Filtered sequences saved to {output_fasta}")
 
 def download_sequences(protein_family, taxonomy, output_path):
     file_name = protein_family+'_'+taxonomy+'_sequences.fasta'
@@ -25,6 +33,9 @@ def main():
     os.makedirs(args.output_path, exist_ok=True)
     print(f"Output directory: {args.output_path}")
     download_sequences(args.protein_family, args.taxonomy, args.output_path)
+    filtered_fasta = os.path.join(args.output_path, "filtered_sequences.fasta")
+    seq_file = args.protein_family+'_'+args.taxonomy+'_sequences.fasta'
+    filter_sequences(os.path.join(args.output_path, seq_file), filtered_fasta)
 
 
 
